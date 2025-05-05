@@ -1,6 +1,6 @@
 {
   "name": "resume",
-"homepage": "https://khubab138.github.io/JobFit_AI-Integrated-App",
+ "homepage": "https://khubab138.github.io/JobFit_AI-Integrated-App",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,9 +9,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "vite build --base=/JobFit_AI-Integrated-App/",
-    "postbuild": "cp dist/index.html dist/404.html",
-  "deploy": "gh-pages -d dist"
+    "predeploy" :"npm run build",
+    "deploy" : "gh-pages -d dist"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.7.0",
