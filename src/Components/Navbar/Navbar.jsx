@@ -3,8 +3,10 @@ import { IoMdMenu } from "react-icons/io";
 import { ImCancelCircle } from "react-icons/im";
 import Navigation from "./Navigation";
 import { HiH1 } from "react-icons/hi2";
+import logo from "../../assets/Logo/L.svg"
 
 const Navbar = () => {
+  const logoImage = logo ;
   const [isMenu, setIsMenu] = useState(false);
   return (
     <nav className="">
@@ -13,7 +15,7 @@ const Navbar = () => {
           className="flex flex-wrap flex-row justify-between place-items-center "
           href="http://localhost:5173/"
         >
-          <img className="h-18" src="\src\assets\Logo\L.svg" alt="img od" />
+          <img className="h-18" src={logoImage} alt="img od" />
           <span className="text-2xl font-semibold text-white ">jobfit</span>
         </a>
 

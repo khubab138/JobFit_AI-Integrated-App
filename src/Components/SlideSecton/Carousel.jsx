@@ -1,15 +1,16 @@
 // src/components/Carousel.js
 import React, { useState } from 'react';
 
-const Carousel = () => {
-  const images = [
-    "/src/assets/Card/card1.jpg",
-    "/src/assets/Card/card2.jpg",
-    "/src/assets/Card/card3.jpg",
-    "/src/assets/Card/card4.jpg",
-    "/src/assets/Card/card5.jpg",
-  ];
+import card1 from '../../assets/Card/card1.jpg';
+import card2 from '../../assets/Card/card2.jpg';
+import card3 from '../../assets/Card/card3.jpg';
+import card4 from '../../assets/Card/card4.jpg';
+import card5 from '../../assets/Card/card5.jpg';
 
+
+
+const Carousel = () => {
+  const images = [card1, card2, card3, card4, card5];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToNext = () => {
