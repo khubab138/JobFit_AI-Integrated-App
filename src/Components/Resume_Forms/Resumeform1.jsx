@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-const ResumeBuilder = () => {
+const ResumeForm1 = () => {
   const handleEduInPutChange = () => {};
 
   const [form, setForm] = useState({
@@ -391,4 +391,4 @@ const ResumeBuilder = () => {
     </div>
   );
 };
-export default ResumeBuilder;
+export default ResumeForm1;

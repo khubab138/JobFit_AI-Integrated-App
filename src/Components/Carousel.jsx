@@ -1,11 +1,11 @@
-// src/components/Carousel.js
+
 import React, { useState } from 'react';
 
-import card1 from '../../assets/Card/card1.jpg';
-import card2 from '../../assets/Card/card2.jpg';
-import card3 from '../../assets/Card/card3.jpg';
-import card4 from '../../assets/Card/card4.jpg';
-import card5 from '../../assets/Card/card5.jpg';
+import card1 from '../assets/Card/card1.jpg';
+import card2 from '../assets/Card/card2.jpg';
+import card3 from '../assets/Card/card3.jpg';
+import card4 from '../assets/Card/card4.jpg';
+import card5 from '../assets/Card/card5.jpg';
 
 
 
@@ -43,7 +43,7 @@ const Carousel = () => {
         &gt;
       </button>
 
-      {/* Optional indicators */}
+     
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {images.map((_, index) => (
           <div

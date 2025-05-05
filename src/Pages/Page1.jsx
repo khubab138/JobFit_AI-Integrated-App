@@ -1,20 +1,17 @@
-import React from 'react'
-import Hero from '../Components/hero/Hero'
-import SlideSection from "../Components/SlideSecton/SlideSection" 
-import Navbar from "../Components/Navbar/Navbar"
-
+import React from "react";
+import Home from "../Components/Sections/Home";
+import Upload from "../Components/Sections/Upload";
+import Navbar from "../Components/Navbar/Navbar";
 
 const Page1 = () => {
   return (
-    <div className="container flex flex-col">
-    <Navbar />
-    <Hero />
-    <SlideSection/>
-   
+    
+      <div className="container flex flex-col">
+        <Navbar />
+        <Home />
+        <Upload />
+      </div>
+  );
+};
 
-
-  </div>
-  )
-}
-
-export default Page1
+export default Page1;

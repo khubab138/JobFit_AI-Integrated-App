@@ -1,9 +1,10 @@
 import React from 'react'
+import ResumeForm1 from '../Components/Resume_Forms/Resumeform1'
 
 const page2 = () => {
-  return (
-    <div>page2</div>
-  )
+  return <>
+  <ResumeForm1/>
+  </>
 }
 
 export default page2

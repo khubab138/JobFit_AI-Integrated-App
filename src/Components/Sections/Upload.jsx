@@ -1,6 +1,6 @@
 import React from "react";
-import Carousel from "./Carousel";
-import PDFDropZone from "./PdfSec";
+import Carousel from "../Carousel";
+import PDFDropZone from "../PdfSec";
 
 const SlideSection = () => {
 
@@ -14,7 +14,7 @@ const SlideSection = () => {
   };
   
 
-  return (
+  return ( <section id="upload" >
     <div className=" m-3 h-screen w-full container flex flex-col  ">
       <div className="lg:flex lg:flex-wrap felx lg:translate-x-10">
         <div className="m-4 lg:w-150 lg:h-130  w-45 h-65 max-w-4xl">
@@ -32,7 +32,7 @@ const SlideSection = () => {
         <Carousel />
       </div>
     </div>
-  );
+    </section>  );
 };
 
 export default SlideSection;

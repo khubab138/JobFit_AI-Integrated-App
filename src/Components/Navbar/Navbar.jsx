@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { IoMdMenu } from "react-icons/io";
 import { ImCancelCircle } from "react-icons/im";
 import Navigation from "./Navigation";
-import { HiH1 } from "react-icons/hi2";
 import logo from "../../assets/Logo/L.svg"
 
 const Navbar = () => {
   const logoImage = logo ;
   const [isMenu, setIsMenu] = useState(false);
   return (
-    <nav className="">
-      <div className="flex flex-wrap flex-row justify-between items-center p-3 ">
+    <nav className="fixed lg:top-3 top-6 w-screen lg:w-full z-50">
+      <div className=" max-w-6xl border-transparent rounded-2xl backdrop-blur-lg flex flex-wrap flex-row justify-between items-center mx-auto px-3 ">
         <a
           className="flex flex-wrap flex-row justify-between place-items-center "
           href="http://localhost:5173/"
@@ -40,14 +39,14 @@ const Navbar = () => {
           }  `}
           style={{ transition: "transform 0.3s ease, opacity 0.3s ease" }}
         >
-          <li className="list-none w-full text-center p-4 transition-all cursor-pointer">Home</li>
-          <li className="list-none w-full text-center p-4 transition-all cursor-pointer">Upload Resume</li>
-          <li className="list-none w-full text-center p-4 transition-all cursor-pointer">About</li>
+          <li href="#home" className="list-none w-full text-center p-4 transition-all cursor-pointer">Home</li>
+          <li href="#upload" className="list-none w-full text-center p-4 transition-all cursor-pointer">Upload Resume</li>
+          <li href="#about" className="list-none w-full text-center p-4 transition-all cursor-pointer">About</li>
           
         </div>
 
         <Navigation />
-        <div className=" lg:flex gap-3 translate-x-18 hidden md:block ">
+        <div className=" lg:flex gap-3  hidden md:block ">
           <button className="h-10 w-20 bg-green-400 text-sm text-black border rounded-3xl cursor-pointer hover:bg-green-200 hover:text-black ">
             Sign In
           </button>

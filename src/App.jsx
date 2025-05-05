@@ -1,9 +1,7 @@
 import React from "react";
-import Resumeform1 from "./Components/Resume_Forms/Resumeform1";
 import Page1 from "./Pages/Page1";
-import Page2 from "./Pages/page2";
+import Page2 from "./Pages/Page2";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import EduSec from "./Components/Resume_Forms/EduSec";
 
 const App = () => {
   return (
@@ -13,7 +11,7 @@ const App = () => {
         <BrowserRouter  basename="/JobFit_AI-Integrated-App">
         <Routes>
           <Route path="/" element={<Page1 /> } ></Route>
-          <Route path="/f1" element={<Resumeform1 />} ></Route>
+          <Route path="/f1" element={<Page2 />} ></Route>
         </Routes>
         </BrowserRouter>
       </div>

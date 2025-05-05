@@ -2,7 +2,9 @@
 
 @import "tailwindcss";
 
-
+*{
+    outline: red;
+}
 
 :root{
     font-family: Poppins;

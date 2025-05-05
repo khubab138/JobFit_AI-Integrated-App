@@ -2,7 +2,7 @@ import React from "react";
 import { MdOutlineDocumentScanner } from "react-icons/md";
 import { LuGitCompareArrows } from "react-icons/lu";
 import { GoChecklist } from "react-icons/go";
-import FlipCard from "./Flipcard";
+import FlipCard from "../FlipCard";
 
 import { FaGoogle } from "react-icons/fa";
 import { SiTesla } from "react-icons/si";
@@ -14,7 +14,7 @@ import { FaApple } from "react-icons/fa";
 
 const Hero = () => {
   return (
-    <>
+    <section id="home" className="min-h-full py-25  min-w-screen " >
       <div className="lg:mb-20">
         <div className="flex flex-wrap lg:translate-x-10">
           <div className="w-full lg:w-1/2">
@@ -56,8 +56,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </>
-  );
+      </section>  );
 };
 
 export default Hero;
