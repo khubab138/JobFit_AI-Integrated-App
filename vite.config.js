@@ -9,13 +9,13 @@ export default defineConfig({
     tailwindcss(),
   ],
   base:"/JobFit_AI-Integrated-App",
-  build: {
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
-        404: path.resolve(__dirname, 'index.html'), // this copies index.html as 404.html
-      },
-    },
-  },
+  // build: {
+  //   rollupOptions: {
+  //     input: {
+  //       main: path.resolve(__dirname, 'index.html'),
+  //       404: path.resolve(__dirname, 'index.html'), // this copies index.html as 404.html
+  //     },
+  //   },
+  // },
 
 })
