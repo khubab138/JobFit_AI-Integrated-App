@@ -18,6 +18,7 @@ const resumeSlice = createSlice({
   name: 'resume',
   initialState,
   reducers: {
+    resetForm: () => initialState,
     updateField: (state, action) => {
       const { name, value } = action.payload;
       state[name] = value;
@@ -43,6 +44,7 @@ const resumeSlice = createSlice({
     addExperience: (state) => {
       state.experience.push({ exName: '', exDescription: '' });
     },
+    
   },
 });
 
@@ -54,6 +56,7 @@ export const {
   addCertificate,
   updateExperience,
   addExperience,
+  resetForm,
 } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

@@ -10,10 +10,12 @@ import {
   addCertificate,
   updateExperience,
   addExperience,
+  resetForm,
 } from "../../Redux/ResumeSlices";
+import { BiLogOut } from "react-icons/bi";
+import logo from "../../assets/Logo/l.svg"
 
 const ResumeForm1 = () => {
-
   const isFormValid = () => {
     return (
       form.name.trim() &&
@@ -29,10 +31,14 @@ const ResumeForm1 = () => {
       form.experience.every((e) => e.exName.trim() && e.exDescription.trim())
     );
   };
-  
+
   const form = useSelector((state) => state.resume);
   const dispatch = useDispatch();
   const resumeRef = useRef();
+
+  const resetFormHandler = () => {
+    dispatch(resetForm());
+  };
 
   const downloadPDF = () => {
     const input = resumeRef.current;
@@ -66,6 +72,8 @@ const ResumeForm1 = () => {
   const handleExperienceChange = (index, field, value) =>
     dispatch(updateExperience({ index, field, value }));
 
+  const navLogo = logo;
+
   return (
     <div className="ltr" dir="ltr">
       <div className="flex">
@@ -73,7 +81,7 @@ const ResumeForm1 = () => {
           className="flex flex-wrap flex-row justify-between place-items-center "
           href="http://localhost:5173/"
         >
-          <img className="h-18" src="\src\assets\Logo\L.svg" alt="img od" />
+          <img className="h-18" src={navLogo} alt="img od" />
           <span className="text-2xl font-semibold text-white ">jobfit</span>
         </a>
       </div>
@@ -235,12 +243,22 @@ const ResumeForm1 = () => {
             </button>
           </div>
           <button
-            onClick={downloadPDF}
+            onClick={ ()=>{
+               downloadPDF();
+              dispatch(resetForm())
+            }}
             disabled={!isFormValid()}
-            className={`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 ${!isFormValid() && "bg-gray-500 hover:" }`}
+            className={`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 ${
+              !isFormValid() && "bg-gray-500 hover:"
+            }`}
           >
-          
-          {!isFormValid() ? <span className="font-bold text-red-500">Complete fill the form</span> : <span>  Download PDF</span>}
+            {!isFormValid() ? (
+              <span className="font-bold text-red-500">
+                Complete fill the form
+              </span>
+            ) : (
+              <span> Download PDF</span>
+            )}
           </button>
         </div>
 
