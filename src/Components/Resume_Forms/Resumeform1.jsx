@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useDispatch, useSelector } from "react-redux";
+import { getField } from "../../Redux/AiSlice"
 import {
   updateField,
   updateEducation,
@@ -33,6 +34,7 @@ const ResumeForm1 = () => {
   };
 
   const form = useSelector((state) => state.resume);
+  const getAi = useSelector((state) => state.ai);
   const dispatch = useDispatch();
   const resumeRef = useRef();
 
@@ -60,8 +62,17 @@ const ResumeForm1 = () => {
     });
   };
 
-  const handleInputChange = (e) =>
-    dispatch(updateField({ name: e.target.name, value: e.target.value }));
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    dispatch(updateField({ name, value }));
+    //___________FOR AI _____________
+    dispatch(getField({ name, value }));
+  };
+//_____________FOR AI_____________
+
+// const getInputForAi = (e)=>{
+// dispatch(getAi({name:e.target.name, value:e.target.value}))
+// }
 
   const handleEduChange = (index, field, value) =>
     dispatch(updateEducation({ index, field, value }));
@@ -249,12 +260,12 @@ const ResumeForm1 = () => {
             }}
             disabled={!isFormValid()}
             className={`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 ${
-              !isFormValid() && "bg-gray-500 hover:"
+              !isFormValid() && "bg-gray-500 hover:bg-red-500 hover:text-white"
             }`}
           >
             {!isFormValid() ? (
-              <span className="font-bold text-red-500">
-                Complete fill the form
+              <span className="font-bold">
+               Please fill form
               </span>
             ) : (
               <span> Download PDF</span>
