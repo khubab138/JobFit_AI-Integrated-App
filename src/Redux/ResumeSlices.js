@@ -1,31 +1,59 @@
-import {createSlice} from "@reduxjs/toolkit"
+// src/redux/resumeSlice.js
+import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  name: '',
+  applyingFor: '',
+  email: '',
+  phone: '',
+  address: '',
+  aboutMe: '',
+  skills: '',
+  education: [{ heading: '', description: '' }],
+  certificates: [{ CerName: '', cerDescription: '' }],
+  experience: [{ exName: '', exDescription: '' }],
+};
 
-  const   initialState = {
-        name: "",
-        applyingFor: "",
-        email: "",
-        phone: "",
-        address: "",
-        aboutMe: "",
-        education: [{ heading: "", description: "" }],
-        certificates: [{ CerName: "", cerDescription: "" }],
-        skills: "",
-        experience: [{ exName: "", exDescription: "" }],
-      }
+const resumeSlice = createSlice({
+  name: 'resume',
+  initialState,
+  reducers: {
+    updateField: (state, action) => {
+      const { name, value } = action.payload;
+      state[name] = value;
+    },
+    updateEducation: (state, action) => {
+      const { index, field, value } = action.payload;
+      state.education[index][field] = value;
+    },
+    addEducation: (state) => {
+      state.education.push({ heading: '', description: '' });
+    },
+    updateCertificate: (state, action) => {
+      const { index, field, value } = action.payload;
+      state.certificates[index][field] = value;
+    },
+    addCertificate: (state) => {
+      state.certificates.push({ CerName: '', cerDescription: '' });
+    },
+    updateExperience: (state, action) => {
+      const { index, field, value } = action.payload;
+      state.experience[index][field] = value;
+    },
+    addExperience: (state) => {
+      state.experience.push({ exName: '', exDescription: '' });
+    },
+  },
+});
 
-const ResumeSlices = createSlice({
-      
+export const {
+  updateField,
+  updateEducation,
+  addEducation,
+  updateCertificate,
+  addCertificate,
+  updateExperience,
+  addExperience,
+} = resumeSlice.actions;
 
-    name:"resume",
-    initialState,
-    reducers:{
-        increment:state =>{state.value += 1},
-        decrement:state =>{state.value -= 1},
-        byValue:(state, action) =>{state.value += action.payload},
-    }
-
-})
-
-export const {increment,decrement, byValue} = ResumeSlices.actions
-export default ResumeSlices.reducer
+export default resumeSlice.reducer;

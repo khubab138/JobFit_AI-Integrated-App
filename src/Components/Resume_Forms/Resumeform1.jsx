@@ -1,71 +1,38 @@
 import React, { useState, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateField,
+  updateEducation,
+  addEducation,
+  updateCertificate,
+  addCertificate,
+  updateExperience,
+  addExperience,
+} from "../../Redux/ResumeSlices";
 
 const ResumeForm1 = () => {
-  const handleEduInPutChange = () => {};
 
-  const [form, setForm] = useState({
-    name: "",
-    applyingFor: "",
-    email: "",
-    phone: "",
-    address: "",
-    aboutMe: "",
-    education: [{ heading: "", description: "" }],
-    certificates: [{ CerName: "", cerDescription: "" }],
-    skills: "",
-    experience: [{ exName: "", exDescription: "" }],
-  });
-
+  const isFormValid = () => {
+    return (
+      form.name.trim() &&
+      form.email.trim() &&
+      form.phone.trim() &&
+      form.address.trim() &&
+      form.applyingFor.trim() &&
+      form.aboutMe.trim() &&
+      form.skills.trim() &&
+      form.education.length > 0 &&
+      form.education.every((e) => e.heading.trim() && e.description.trim()) &&
+      form.experience.length > 0 &&
+      form.experience.every((e) => e.exName.trim() && e.exDescription.trim())
+    );
+  };
+  
+  const form = useSelector((state) => state.resume);
+  const dispatch = useDispatch();
   const resumeRef = useRef();
-
-  //Education input Section Functionality
-  const handleEducationChange = (index, Field, value) => {
-    const updated = [...form.education];
-    updated[index][Field] = value;
-    setForm({ ...form, education: updated });
-  };
-
-  const addEducationField = () => {
-    setForm({
-      ...form,
-      education: [...form.education, { heading: "", description: "" }],
-    });
-  };
-
-  // Certificate Input Section
-  const handleCertificateonChange = (index, field, value) => {
-    const updated = [...form.certificates];
-    updated[index][field] = value;
-    setForm({ ...form, certificates: updated });
-  };
-
-  const addCertificateField = () => {
-    setForm({
-      ...form,
-      certificates: [...form.certificates, { CerName: "", cerDescription: "" }],
-    });
-  };
-
-  // Experince InputField
-  const handleExperinceonChange = (index, field, value) => {
-    const updated = [...form.experience];
-    updated[index][field] = value;
-    setForm({ ...form, experience: updated });
-  };
-
-  const addExperinceField = () => {
-    setForm({
-      ...form,
-      experience: [...form.experience, { exName: "", exDescription: "" }],
-    });
-  };
-
-  // Handle the Onchange  on the Form
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const downloadPDF = () => {
     const input = resumeRef.current;
@@ -81,9 +48,23 @@ const ResumeForm1 = () => {
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
       pdf.setFontSize(10);
       pdf.setTextColor(150);
-      pdf.save("resume.pdf");
+      const cleanName = form.name.trim().replace(/\s+/g, "_") || "resume";
+      const fileName = `${cleanName}_.pdf`;
+      pdf.save(fileName);
     });
   };
+
+  const handleInputChange = (e) =>
+    dispatch(updateField({ name: e.target.name, value: e.target.value }));
+
+  const handleEduChange = (index, field, value) =>
+    dispatch(updateEducation({ index, field, value }));
+
+  const handleCertificateChange = (index, field, value) =>
+    dispatch(updateCertificate({ index, field, value }));
+
+  const handleExperienceChange = (index, field, value) =>
+    dispatch(updateExperience({ index, field, value }));
 
   return (
     <div className="ltr" dir="ltr">
@@ -101,42 +82,48 @@ const ResumeForm1 = () => {
           <div className="INTRODUCTION flex-1 gap-4 p-5">
             <h2 className="text-4xl pb-5 font-bold">Introduction</h2>
             <input
+              required
               name="name"
               placeholder="Full Name"
-              onChange={handleChange}
+              onChange={handleInputChange}
               className="p-2 m-2 text-base border border-gray-300 rounded"
             />
             <input
+              required
               name="applyingFor"
               placeholder="applyingFor Or Role of the Job"
-              onChange={handleChange}
+              onChange={handleInputChange}
               className="p-2 m-2 text-base border border-gray-300 rounded"
             />
             <input
+              required
               name="email"
               placeholder="Email"
-              onChange={handleChange}
+              onChange={handleInputChange}
               className="p-2 m-2 text-base border border-gray-300 rounded"
             />
             <input
+              required
               name="phone"
               placeholder="Phone Number"
-              onChange={handleChange}
+              onChange={handleInputChange}
               className="p-2 m-2 text-base border border-gray-300 rounded"
             />
             <input
+              required
               name="address"
               placeholder="Enter your Recent Address"
-              onChange={handleChange}
+              onChange={handleInputChange}
               className="p-2 m-2 text-base border border-gray-300 rounded"
             />
           </div>
           <h2 className="text-4xl pb-5 font-bold">Summary</h2>
           <textarea
+            required
             name="aboutMe"
             placeholder="About Your-Self Or Summerized"
             maxLength={300}
-            onChange={handleChange}
+            onChange={handleInputChange}
             className="p-2 text-base border border-gray-300 rounded resize-y h-20"
           />
           <div className="flex-1  flex-col ">
@@ -144,18 +131,20 @@ const ResumeForm1 = () => {
             {form.education.map((edu, index) => (
               <div key={index}>
                 <input
+                  required
                   value={edu.heading}
                   placeholder={`Degree ${index + 1}`}
                   onChange={(e) =>
-                    handleEducationChange(index, "heading", e.target.value)
+                    handleEduChange(index, "heading", e.target.value)
                   }
                   className="p-2 m-2 text-base border border-gray-300 rounded"
                 />
                 <input
+                  required
                   value={edu.description}
                   placeholder={`Institute and Passing Year ${index + 1}`}
                   onChange={(e) =>
-                    handleEducationChange(index, "description", e.target.value)
+                    handleEduChange(index, "description", e.target.value)
                   }
                   className="p-2 mb-2 text-base w-full border border-gray-300 rounded "
                 />
@@ -163,7 +152,7 @@ const ResumeForm1 = () => {
             ))}
             <button
               className="cursor-pointer bg-gray text-white"
-              onClick={addEducationField}
+              onClick={() => dispatch(addEducation())}
             >
               Add More Education
             </button>
@@ -177,15 +166,16 @@ const ResumeForm1 = () => {
                   value={cer.CerName}
                   placeholder={`Certificate Name ${index + 1}`}
                   onChange={(e) =>
-                    handleCertificateonChange(index, "CerName", e.target.value)
+                    handleCertificateChange(index, "CerName", e.target.value)
                   }
                   className="p-2 m-2 text-base border border-gray-300 rounded"
                 />
                 <input
                   value={cer.cerDescription}
-                  placeholder={`Institute and Passing Year ${index + 1}`}
+                  placeholder={`Institute a
+                    nd Passing Year ${index + 1}`}
                   onChange={(e) =>
-                    handleCertificateonChange(
+                    handleCertificateChange(
                       index,
                       "cerDescription",
                       e.target.value
@@ -197,7 +187,7 @@ const ResumeForm1 = () => {
             ))}
             <button
               className="cursor-pointer bg-gray text-white"
-              onClick={addCertificateField}
+              onClick={() => dispatch(addCertificate())}
             >
               Add More Certificate
             </button>
@@ -207,7 +197,7 @@ const ResumeForm1 = () => {
             <textarea
               name="skills"
               placeholder="Skills"
-              onChange={handleChange}
+              onChange={handleInputChange}
               className="p-2 w-full text-base border border-gray-300 rounded resize-y h-20"
             />
           </div>
@@ -219,7 +209,7 @@ const ResumeForm1 = () => {
                   value={exp.exName}
                   placeholder={`Compuny or Project ${index + 1}`}
                   onChange={(e) =>
-                    handleExperinceonChange(index, "exName", e.target.value)
+                    handleExperienceChange(index, "exName", e.target.value)
                   }
                   className="p-2 m-2 text-base border border-gray-300 rounded"
                 />
@@ -227,7 +217,7 @@ const ResumeForm1 = () => {
                   value={exp.exDescription}
                   placeholder={`Expirience on work or Project ${index + 1}`}
                   onChange={(e) =>
-                    handleExperinceonChange(
+                    handleExperienceChange(
                       index,
                       "exDescription",
                       e.target.value
@@ -239,16 +229,18 @@ const ResumeForm1 = () => {
             ))}
             <button
               className="cursor-pointer bg-gray text-white"
-              onClick={addExperinceField}
+              onClick={() => dispatch(addExperience())}
             >
               Add More Field
             </button>
           </div>
           <button
             onClick={downloadPDF}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            disabled={!isFormValid()}
+            className={`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 ${!isFormValid() && "bg-gray-500 hover:" }`}
           >
-            Download PDF
+          
+          {!isFormValid() ? <span className="font-bold text-red-500">Complete fill the form</span> : <span>  Download PDF</span>}
           </button>
         </div>
 

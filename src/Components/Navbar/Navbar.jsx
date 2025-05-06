@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { IoMdMenu } from "react-icons/io";
 import { ImCancelCircle } from "react-icons/im";
 import Navigation from "./Navigation";
-import logo from "../../assets/Logo/L.svg"
+import logo from "../../assets/Logo/L.svg";
 
 const Navbar = () => {
-  const logoImage = logo ;
+  const logoImage = logo;
   const [isMenu, setIsMenu] = useState(false);
   return (
     <nav className="fixed lg:top-3 top-6 w-screen lg:w-full z-50">
@@ -39,10 +39,24 @@ const Navbar = () => {
           }  `}
           style={{ transition: "transform 0.3s ease, opacity 0.3s ease" }}
         >
-          <li href="#home" className="list-none w-full text-center p-4 transition-all cursor-pointer">Home</li>
-          <li href="#upload" className="list-none w-full text-center p-4 transition-all cursor-pointer">Upload Resume</li>
-          <li href="#about" className="list-none w-full text-center p-4 transition-all cursor-pointer">About</li>
-          
+          <li
+            href="#home"
+            className="list-none w-full active:bg-green-200 text-center p-4 transition-all cursor-pointer"
+          >
+            Home
+          </li>
+          <li
+            href="#about"
+            className="list-none  active:bg-green-200 w-full text-center p-4 transition-all cursor-pointer"
+          >
+            About
+          </li>
+          <li
+            href="#upload"
+            className="list-none active:bg-green-200  w-full text-center p-4 transition-all cursor-pointer"
+          >
+            Upload Resume
+          </li>
         </div>
 
         <Navigation />

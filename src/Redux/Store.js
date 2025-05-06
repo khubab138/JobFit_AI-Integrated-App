@@ -3,6 +3,6 @@ import resumeReducer from "./ResumeSlices"
 
 export const Store = configureStore({
     reducer:{
-        form: resumeReducer,
+        resume: resumeReducer,
     }
 })
