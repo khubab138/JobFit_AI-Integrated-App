@@ -13,7 +13,8 @@ import {
   addExperience,
   resetForm,
 } from "../../Redux/ResumeSlices";
-// import logo from "../../assets/Logo/L.svg"
+import { BiLogOut } from "react-icons/bi";
+import logo from "../../assets/Logo/L.svg"
 
 const ResumeForm1 = () => {
   const isFormValid = () => {
@@ -82,7 +83,7 @@ const ResumeForm1 = () => {
   const handleExperienceChange = (index, field, value) =>
     dispatch(updateExperience({ index, field, value }));
 
-  // const navLogo = logo;
+  const navLogo = logo;
 
   return (
     <div className="ltr" dir="ltr">
@@ -91,7 +92,7 @@ const ResumeForm1 = () => {
           className="flex flex-wrap flex-row justify-between place-items-center "
           href="http://localhost:5173/"
         >
-          <img className="h-18" src="" alt="LOGO" />
+          <img className="h-18" src={navLogo} alt="img od" />
           <span className="text-2xl font-semibold text-white ">jobfit</span>
         </a>
       </div>
