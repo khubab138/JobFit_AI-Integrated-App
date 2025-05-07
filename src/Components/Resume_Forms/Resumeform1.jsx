@@ -13,8 +13,7 @@ import {
   addExperience,
   resetForm,
 } from "../../Redux/ResumeSlices";
-import { BiLogOut } from "react-icons/bi";
-import logo from "../../assets/Logo/L.svg"
+// import logo from "../../assets/Logo/L.svg"
 
 const ResumeForm1 = () => {
   const isFormValid = () => {
