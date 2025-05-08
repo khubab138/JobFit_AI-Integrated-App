@@ -2,6 +2,7 @@ import React from "react";
 import Page1 from "./Pages/Page1";
 import Page2 from "./Pages/Page2";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Ai from "./Components/AI_Management/Ai";
 
 const App = () => {
   return (
@@ -11,7 +12,7 @@ const App = () => {
         <BrowserRouter  basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<Page1 /> } ></Route>
-          <Route path="/f1" element={<Page2 />} ></Route>
+          <Route path="/f1" element={<Ai />} ></Route>
         </Routes>
         </BrowserRouter>
       </div>

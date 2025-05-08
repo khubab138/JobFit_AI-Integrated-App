@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useDispatch, useSelector } from "react-redux";
-import { getField } from "../../Redux/AiSlice"
 import {
   updateField,
   updateEducation,
@@ -13,8 +12,7 @@ import {
   addExperience,
   resetForm,
 } from "../../Redux/ResumeSlices";
-import { BiLogOut } from "react-icons/bi";
-import logo from "../../assets/Logo/L.svg"
+import logo from "../../assets/Logo/L.svg";
 
 const ResumeForm1 = () => {
   const isFormValid = () => {
@@ -65,14 +63,7 @@ const ResumeForm1 = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     dispatch(updateField({ name, value }));
-    //___________FOR AI _____________
-    dispatch(getField({ name, value }));
   };
-//_____________FOR AI_____________
-
-// const getInputForAi = (e)=>{
-// dispatch(getAi({name:e.target.name, value:e.target.value}))
-// }
 
   const handleEduChange = (index, field, value) =>
     dispatch(updateEducation({ index, field, value }));
@@ -254,9 +245,9 @@ const ResumeForm1 = () => {
             </button>
           </div>
           <button
-            onClick={ ()=>{
-               downloadPDF();
-              dispatch(resetForm())
+            onClick={() => {
+              downloadPDF();
+              dispatch(resetForm());
             }}
             disabled={!isFormValid()}
             className={`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 ${
@@ -264,9 +255,7 @@ const ResumeForm1 = () => {
             }`}
           >
             {!isFormValid() ? (
-              <span className="font-bold">
-               Please fill form
-              </span>
+              <span className="font-bold">Please fill form</span>
             ) : (
               <span> Download PDF</span>
             )}

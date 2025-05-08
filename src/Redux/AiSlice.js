@@ -1,29 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const initialState = {
-  name: "",
-  applyingFor: "",
-  email: "",
-  phone: "",
-  address: "",
-  aboutMe: "",
-  skills: "",
-  education: [{ heading: "", description: "" }],
-  certificates: [{ CerName: "", cerDescription: "" }],
-  experience: [{ exName: "", exDescription: "" }],
-};
+export const fetchAiResult = createAsyncThunk("fetchResults", async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  return res.json();
+});
 
 const AiSlice = createSlice({
   name: "ai",
-  initialState,
-  reducers: {
-    getField: (state, action) => {
-      const { name, value } = action.payload;
-      state[name] = value;
-    },
+  initialState: {
+    isLoading: false,
+    data: null,
+    isError: false,
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchAiResult.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchAiResult.rejected, (state, action) => {
+      console.log('Error', action.payload);
+      state.isError = true;
+      state.isLoading = false
+    });
+    builder.addCase(fetchAiResult.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload;
+    });
   },
 });
 
-
-export const {getField} = AiSlice.actions;
 export default AiSlice.reducer;
