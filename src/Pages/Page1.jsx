@@ -1,6 +1,6 @@
 import React from "react";
 import Home from "../Components/Sections/Home";
-import Upload from "../Components/Sections/Upload";
+import UploadSection from "../Components/Sections/UploadSection";
 import Navbar from "../Components/Navbar/Navbar";
 
 const Page1 = () => {
@@ -9,7 +9,7 @@ const Page1 = () => {
       <div className="container flex flex-col">
         <Navbar />
         <Home />
-        <Upload />
+        <UploadSection />
       </div>
   );
 };
