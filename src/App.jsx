@@ -12,7 +12,7 @@ const App = () => {
         <BrowserRouter  basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<Page1 /> } ></Route>
-          <Route path="/f1" element={<Ai />} ></Route>
+          <Route path="/f1" element={<Page2 />} ></Route>
         </Routes>
         </BrowserRouter>
       </div>
